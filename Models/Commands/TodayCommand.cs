@@ -30,10 +30,10 @@ namespace BirthdayBot.Models.Commands
 
             if (items.Count() > 0)
             {
-                StringBuilder sb = new StringBuilder("Дни рождения сегодня:\n");
+                StringBuilder sb = new StringBuilder("***Дни рождения сегодня:***\n");
                 foreach (var i in items)
                 {
-                    sb.AppendFormat("{0}\n", i.Name);
+                    sb.AppendFormat("* {0}\n", i.Name);
                 }
 
                 await botClient.SendTextMessageAsync(chatId, sb.ToString(),
