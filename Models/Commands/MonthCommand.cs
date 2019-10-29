@@ -31,7 +31,7 @@ namespace BirthdayBot.Models.Commands
 
             if (items.Count() > 0)
             {
-                StringBuilder sb = new StringBuilder("***Дни рождения в ближайший месяц:***\n");
+                StringBuilder sb = new StringBuilder("*Дни рождения в ближайший месяц:*\n");
                 foreach (var i in items)
                 {
                     sb.AppendFormat("* {0}: {1}.{2}\n", i.Name, i.Birthday.Day, i.Birthday.Month);

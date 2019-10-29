@@ -47,7 +47,7 @@ namespace BirthdayBot.Models.Commands
                     StringBuilder sb = new StringBuilder("*Результат:*\n");
                     foreach (var i in result)
                     {
-                        sb.AppendFormat("{0}: {1}.{2}\n", i.Name, i.Birthday.Day, i.Birthday.Month);
+                        sb.AppendFormat("* {0}: {1}.{2}\n", i.Name, i.Birthday.Day, i.Birthday.Month);
                     }
 
                     await botClient.SendTextMessageAsync(chatId, sb.ToString(),
