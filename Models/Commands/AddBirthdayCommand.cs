@@ -37,13 +37,23 @@ namespace BirthdayBot.Models.Commands
                     for (int i = 1; i < str.Length - 1; i++)
                     {
                         name += str[i];
+
+                        if (i > 1 && i < str.Length - 2)
+                        {
+                            name += " ";
+                        }
                     }
 
                     await context.Create(
                         new User { Name = name, Birthday = birthday, ChatId = chatId });
 
-                    var m = "Добавлено: " + name + " " + str[2];
+                    var m = "Добавлено: " + name + " " + birthday.Day + "." + birthday.Month;
                     await botClient.SendTextMessageAsync(chatId, m,
+                        parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
+                }
+                else
+                {
+                    await botClient.SendTextMessageAsync(chatId, "Введите команду в формате: /addbirthday {Имя} {Дата}",
                         parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
                 }
             }

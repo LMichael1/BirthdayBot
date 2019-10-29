@@ -8,9 +8,9 @@ using Telegram.Bot.Types;
 
 namespace BirthdayBot.Models.Commands
 {
-    public class TodayCommand : ICommand
+    public class MonthCommand : ICommand
     {
-        public string Name => @"/today";
+        public string Name => @"/month";
 
         public bool Contains(Message message)
         {
@@ -26,14 +26,15 @@ namespace BirthdayBot.Models.Commands
             AppDbContext context = new AppDbContext();
 
             var result = await context.GetUsers(String.Empty, chatId);
-            var items = result.Where(i => i.Birthday.Date == DateTime.Today);
+            var items = result.Where(i => i.Birthday.Date >= DateTime.Today && 
+                                i.Birthday.Date <= DateTime.Today.AddDays(30));
 
             if (items.Count() > 0)
             {
-                StringBuilder sb = new StringBuilder("Дни рождения сегодня:\n");
+                StringBuilder sb = new StringBuilder("Дни рождения в ближайший месяц:\n");
                 foreach (var i in items)
                 {
-                    sb.AppendFormat("{0}\n", i.Name);
+                    sb.AppendFormat("{0}: {1}.{2}\n", i.Name, i.Birthday.Day, i.Birthday.Month);
                 }
 
                 await botClient.SendTextMessageAsync(chatId, sb.ToString(),
