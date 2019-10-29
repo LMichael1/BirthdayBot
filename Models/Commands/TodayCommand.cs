@@ -30,7 +30,7 @@ namespace BirthdayBot.Models.Commands
 
             if (items.Count() > 0)
             {
-                StringBuilder sb = new StringBuilder("_*Дни рождения сегодня:*_\n");
+                StringBuilder sb = new StringBuilder("*Дни рождения сегодня:*\n");
                 foreach (var i in items)
                 {
                     sb.AppendFormat("{0}\n", i.Name);
