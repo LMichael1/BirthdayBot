@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace BirthdayBot.Models
 {
@@ -37,6 +38,11 @@ namespace BirthdayBot.Models
             }
 
             return await Users.Find(filter).ToListAsync();
+        }
+
+        public IEnumerable<long> GetChats()
+        {
+            return Users.AsQueryable().Select(i => i.ChatId).Distinct();
         }
 
         public async Task<User> GetUser(string id)

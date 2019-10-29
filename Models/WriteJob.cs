@@ -18,25 +18,29 @@ namespace BirthdayBot.Models
             AppDbContext cont = new AppDbContext();
             var botClient = await Bot.GetBotClientAsync();
 
-            var result = await cont.GetUsers(String.Empty, -1001191153807);
-            var items = result.Where(i => i.Birthday.Date >= DateTime.Today &&
-                                i.Birthday.Date <= DateTime.Today.AddDays(30));
+            var groups = cont.GetChats();
 
-            if (items.Count() > 0)
+            foreach (var group in groups)
             {
-                StringBuilder sb = new StringBuilder("*Дни рождения в ближайший месяц:*\n");
-                foreach (var i in items)
+                var result = await cont.GetUsers(String.Empty, group);
+                var items = result.Where(i => i.Birthday.Date == DateTime.Today);
+
+                if (items.Count() > 0)
                 {
-                    sb.AppendFormat("{0}: *{1}.{2}*\n", i.Name, i.Birthday.Day, i.Birthday.Month);
-                }
+                    StringBuilder sb = new StringBuilder("*Дни рождения сегодня:*\n");
+                    foreach (var i in items)
+                    {
+                        sb.AppendFormat("{0}\n", i.Name);
+                    }
 
-                await botClient.SendTextMessageAsync(-1001191153807, sb.ToString(),
+                    await botClient.SendTextMessageAsync(group, sb.ToString(),
+                            parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
+                }
+                else
+                {
+                    await botClient.SendTextMessageAsync(group, "Именинники не найдены.",
                         parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
-            }
-            else
-            {
-                await botClient.SendTextMessageAsync(-1001191153807, "Именинники не найдены.",
-                    parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
+                }
             }
         }
     }
