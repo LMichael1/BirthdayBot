@@ -23,6 +23,7 @@ namespace BirthdayBot.Models
 
             commandsList = new List<ICommand>();
             commandsList.Add(new StartCommand());
+            commandsList.Add(new AddBirthdayCommand());
             //TODO: Add more commands
 
             botClient = new TelegramBotClient(AppSettings.Key);
