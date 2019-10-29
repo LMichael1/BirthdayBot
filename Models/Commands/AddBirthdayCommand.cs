@@ -54,7 +54,7 @@ namespace BirthdayBot.Models.Commands
                     }
 
                     await context.Create(
-                        new User { Name = name, Birthday = birthday, ChatId = chatId });
+                        new User { Name = name, Birthday = birthday.ToLocalTime(), ChatId = chatId });
 
                     var m = "*Добавлено:* \n" + name + ": *" + birthday.Day + "." + birthday.Month + "*";
                     await botClient.SendTextMessageAsync(chatId, m,
