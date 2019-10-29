@@ -9,7 +9,7 @@ namespace BirthdayBot.Models
     public static class AppSettings
     {
         public static string Url { get; set; } = "https://birthdayreminderbot.herokuapp.com:443/{0}";
-        public static string Name { get; set; } = "pzbirthdayreminderbot";
+        public static string Name { get; set; } = "pzbirthdaybot";
         public static string Key { get; set; } = "1021020710:AAGMfdIs22y0rTwc5a6GynMOb81DNuYEYWI";
     }
 }
