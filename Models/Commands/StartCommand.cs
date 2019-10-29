@@ -22,7 +22,7 @@ namespace BirthdayBot.Models.Commands
         public async Task Execute(Message message, TelegramBotClient botClient)
         {
             var chatId = message.Chat.Id;
-            await botClient.SendTextMessageAsync(chatId, "Привет, " + message.From.FirstName +"!\nЯ бот для сохранения данных о датах рождения.\nВведите /help для получения справки.", 
+            await botClient.SendTextMessageAsync(chatId, "Привет, *" + message.From.FirstName +"*!\nЯ бот для сохранения данных о датах рождения.\nВведите /help для получения справки." + DateTime.Now, 
                 parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
         }
     }
