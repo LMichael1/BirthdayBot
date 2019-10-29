@@ -1,0 +1,18 @@
+version: 2
+jobs:
+ build:
+   machine: true
+   steps:
+     - checkout 
+
+     # build image
+     - run: |         
+         docker info
+         docker build -t aspnetapp -f Dockerfile .
+     # deploy the image
+     - run: |         
+         docker login --username=lmichael1003@gmail.com --password=b03fae3f-8ffd-4b41-86d7-7110388e9a4f registry.heroku.com
+         docker tag aspnetapp registry.heroku.com/birthdayreminderbot/web
+         docker push registry.heroku.com/birthdayreminderbot/web                
+         curl https://cli-assets.heroku.com/install.sh | sh
+         heroku container:release web -a birthdayreminderbot
