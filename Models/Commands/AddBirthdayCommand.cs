@@ -23,6 +23,15 @@ namespace BirthdayBot.Models.Commands
         {
             var chatId = message.Chat.Id;
 
+            var admins = await botClient.GetChatAdministratorsAsync(chatId);
+            if (admins.FirstOrDefault(a=>a.User.Id == message.From.Id) == null)
+            {
+                await botClient.SendTextMessageAsync(chatId, "Добавлять информацию может только администратор.",
+                    parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
+
+                return;
+            }
+
             var str = message.Text.Split(new char[] { ' ' });
 
             if (str.Length >= 3)
