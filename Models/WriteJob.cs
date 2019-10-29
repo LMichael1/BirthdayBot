@@ -13,7 +13,7 @@ namespace BirthdayBot.Models
         {
         }
 
-        public async Task<Task> Execute(IJobExecutionContext context)
+        public async Task Execute(IJobExecutionContext context)
         {
             AppDbContext cont = new AppDbContext();
             var botClient = await Bot.GetBotClientAsync();
@@ -38,8 +38,6 @@ namespace BirthdayBot.Models
                 await botClient.SendTextMessageAsync(-1001191153807, "Именинники не найдены.",
                     parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
             }
-
-            return Task.CompletedTask;
         }
     }
 }
