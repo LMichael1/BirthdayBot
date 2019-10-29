@@ -27,15 +27,13 @@ namespace BirthdayBot.Models.Commands
 
             if (str.Length >= 3)
             {
-                if (DateTime.TryParse(str[str.Length - 1], out _))
+                DateTime birthday;
+
+                if (DateTime.TryParse(str[str.Length - 1], out birthday))
                 {
                     AppDbContext context = new AppDbContext();
 
-                    System.Globalization.CultureInfo cultureinfo =
-                            new System.Globalization.CultureInfo("uk-UA");
-                    DateTime birthday =DateTime.Parse(str[str.Length - 1], cultureinfo);
                     string name = String.Empty;
-
                     for (int i = 1; i < str.Length - 1; i++)
                     {
                         name += str[i];
