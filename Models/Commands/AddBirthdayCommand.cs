@@ -7,9 +7,9 @@ using Telegram.Bot.Types;
 
 namespace BirthdayBot.Models.Commands
 {
-    public class StartCommand : ICommand
+    public class AddBirthdayCommand : ICommand
     {
-        public string Name => @"/start";
+        public string Name => @"/addbirthday";
 
         public bool Contains(Message message)
         {
@@ -22,7 +22,17 @@ namespace BirthdayBot.Models.Commands
         public async Task Execute(Message message, TelegramBotClient botClient)
         {
             var chatId = message.Chat.Id;
-            await botClient.SendTextMessageAsync(chatId, "Hello, " + message.From.FirstName +"! I'm ASP.NET Core Bot", 
+
+            var str = message.Text.Split(new char[] { ',', ';' });
+
+            if (str.Length == 3)
+            {
+                var m = "Успешно добавлено: " + str[1] + " " + str[2];
+                await botClient.SendTextMessageAsync(chatId, m,
+                    parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
+            }
+
+            await botClient.SendTextMessageAsync(chatId, "Hello, " + message.From.FirstName + "! I'm ASP.NET Core Bot",
                 parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
         }
     }
