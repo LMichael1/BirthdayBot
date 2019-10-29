@@ -24,20 +24,21 @@ namespace BirthdayBot.Models
             get { return _database.GetCollection<User>("Users"); }
         }
 
-        public async Task<IEnumerable<User>> GetUsers(string name)
+        public async Task<IEnumerable<User>> GetUsers(string name, long chatId)
         {
             var builder = new FilterDefinitionBuilder<User>();
             var filter = builder.Empty;
 
             if (!String.IsNullOrWhiteSpace(name))
             {
-                filter = filter & builder.Regex("Name", new BsonRegularExpression(name));
+                filter &= builder.Regex("Name", new BsonRegularExpression(name));
+                filter &= builder.Regex("ChatId", new BsonRegularExpression(chatId.ToString()));
             }
 
             return await Users.Find(filter).ToListAsync();
         }
 
-        public async Task<User> GetPhone(string id)
+        public async Task<User> GetUser(string id)
         {
             return await Users.Find(new BsonDocument("_id", new ObjectId(id))).FirstOrDefaultAsync();
         }

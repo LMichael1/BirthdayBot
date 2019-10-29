@@ -40,7 +40,7 @@ namespace BirthdayBot.Models.Commands
                     }
 
                     await context.Create(
-                        new User { Name = name, Birthday = birthday });
+                        new User { Name = name, Birthday = birthday, ChatId = chatId });
 
                     var m = "Добавлено: " + name + " " + str[2];
                     await botClient.SendTextMessageAsync(chatId, m,
