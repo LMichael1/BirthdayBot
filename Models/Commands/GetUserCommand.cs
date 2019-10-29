@@ -31,6 +31,11 @@ namespace BirthdayBot.Models.Commands
             for (int i = 1; i < nameArray.Length; i++)
             {
                 name += nameArray[i];
+
+                if (i > 1 && i < nameArray.Length - 1)
+                {
+                    name += " ";
+                }
             }
 
             if (name != String.Empty)
@@ -46,6 +51,11 @@ namespace BirthdayBot.Models.Commands
                     }
 
                     await botClient.SendTextMessageAsync(chatId, sb.ToString(),
+                            parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
+                }
+                else
+                {
+                    await botClient.SendTextMessageAsync(chatId, "Поиск не дал результатов.",
                             parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
                 }
             }

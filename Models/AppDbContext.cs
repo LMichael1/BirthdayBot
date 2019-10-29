@@ -32,7 +32,8 @@ namespace BirthdayBot.Models
             if (!String.IsNullOrWhiteSpace(name))
             {
                 filter &= builder.Regex("Name", new BsonRegularExpression(name));
-                filter &= builder.Regex("ChatId", new BsonRegularExpression(chatId.ToString()));
+
+                filter &= builder.Gte("ChatId", chatId);
             }
 
             return await Users.Find(filter).ToListAsync();
