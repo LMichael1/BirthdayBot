@@ -15,7 +15,7 @@ namespace BirthdayBot
     {
         public static void Main(string[] args)
         {
-            var culture = new CultureInfo("ru-RU");
+            var culture = new CultureInfo("uk-UA");
             CultureInfo.DefaultThreadCurrentCulture = culture;
             CultureInfo.DefaultThreadCurrentUICulture = culture;
 
