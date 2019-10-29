@@ -27,7 +27,7 @@ namespace BirthdayBot.Models.Commands
 
             var result = await context.GetUsers(String.Empty, chatId);
             var items = result.Where(i => i.Birthday.Date >= DateTime.Today && 
-                                i.Birthday.Date <= DateTime.Today.AddDays(30));
+                                i.Birthday.Date <= DateTime.Today.AddDays(30)).OrderBy(i=>i.Birthday);
 
             if (items.Count() > 0)
             {

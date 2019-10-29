@@ -26,6 +26,7 @@ namespace BirthdayBot.Models.Commands
             AppDbContext context = new AppDbContext();
 
             var result = await context.GetUsers(String.Empty, chatId);
+            result = result.OrderBy(r => r.Birthday);
 
             if (result.Count() > 0)
             {
