@@ -56,7 +56,7 @@ namespace BirthdayBot.Models.Commands
                     await context.Create(
                         new User { Name = name, Birthday = birthday, ChatId = chatId });
 
-                    var m = "Добавлено: " + name + " " + birthday.Day + "." + birthday.Month;
+                    var m = "*Добавлено:* _" + name + ":_ " + birthday.Day + "." + birthday.Month;
                     await botClient.SendTextMessageAsync(chatId, m,
                         parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
                 }
