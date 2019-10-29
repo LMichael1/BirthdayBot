@@ -36,11 +36,6 @@ namespace BirthdayBot.Models
                     await botClient.SendTextMessageAsync(group, sb.ToString(),
                             parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
                 }
-                else
-                {
-                    await botClient.SendTextMessageAsync(group, "Именинники не найдены.",
-                        parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
-                }
 
                 var itemsweek = result.Where(i => i.Birthday.Date == DateTime.Today.AddDays(7));
 

@@ -29,6 +29,7 @@ namespace BirthdayBot.Models
             commandsList.Add(new WeekCommand());
             commandsList.Add(new GetUserCommand());
             commandsList.Add(new HelpCommand());
+            commandsList.Add(new AllCommand());
 
             botClient = new TelegramBotClient(AppSettings.Key);
             string hook = string.Format(AppSettings.Url, "api/message/update");

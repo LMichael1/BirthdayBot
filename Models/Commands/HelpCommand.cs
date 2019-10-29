@@ -23,7 +23,7 @@ namespace BirthdayBot.Models.Commands
         {
             var chatId = message.Chat.Id;
 
-            var text = "*Список команд:*\n/today - Дни рождения сегодня\n/week - Дни рождения в ближайшую неделю\n/month - Дни рождения в ближайший месяц\n/getuser {Имя} - Получить информацию о пользователе\n/help - Справка";
+            var text = "*Список команд:*\n/today - Дни рождения сегодня\n/week - Дни рождения в ближайшую неделю\n/month - Дни рождения в ближайший месяц\n/all - Все даты рождения\n/getuser {Имя} - Получить информацию о пользователе\n/help - Справка";
             await botClient.SendTextMessageAsync(chatId, text, 
                 parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
         }
