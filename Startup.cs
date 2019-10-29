@@ -40,7 +40,7 @@ namespace BirthdayBot
             services.AddSingleton<WriteJob>();
             services.AddSingleton(new JobSchedule(
                 jobType: typeof(WriteJob),
-                cronExpression: "0 0 1 * * ?")); // every day at 1am
+                cronExpression: "0 0 0 * * ?")); // every day at 1am
 
             services.AddHostedService<QuartzHostedService>();
         }
