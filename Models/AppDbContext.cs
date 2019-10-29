@@ -33,7 +33,7 @@ namespace BirthdayBot.Models
             {
                 filter &= builder.Regex("Name", new BsonRegularExpression(name));
 
-                filter &= builder.Gte("ChatId", chatId);
+                filter &= builder.Eq("ChatId", chatId);
             }
 
             return await Users.Find(filter).ToListAsync();
