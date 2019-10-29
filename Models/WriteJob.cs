@@ -41,6 +41,20 @@ namespace BirthdayBot.Models
                     await botClient.SendTextMessageAsync(group, "Именинники не найдены.",
                         parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
                 }
+
+                var itemsweek = result.Where(i => i.Birthday.Date == DateTime.Today.AddDays(7));
+
+                if (itemsweek.Count() > 0)
+                {
+                    StringBuilder sb = new StringBuilder("*Через неделю День рождения у:*\n");
+                    foreach (var i in itemsweek)
+                    {
+                        sb.AppendFormat("{0} ({1}.{2})\n", i.Name, i.Birthday.Day, i.Birthday.Month);
+                    }
+
+                    await botClient.SendTextMessageAsync(group, sb.ToString(),
+                            parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
+                }
             }
         }
     }
