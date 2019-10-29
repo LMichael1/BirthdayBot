@@ -7,9 +7,9 @@ using Telegram.Bot.Types;
 
 namespace BirthdayBot.Models.Commands
 {
-    public class StartCommand : ICommand
+    public class HelpCommand : ICommand
     {
-        public string Name => @"/start";
+        public string Name => @"/help";
 
         public bool Contains(Message message)
         {
@@ -22,7 +22,9 @@ namespace BirthdayBot.Models.Commands
         public async Task Execute(Message message, TelegramBotClient botClient)
         {
             var chatId = message.Chat.Id;
-            await botClient.SendTextMessageAsync(chatId, "Привет, " + message.From.FirstName +"!\nЯ бот для сохранения данных о датах рождения.\nВведите /help для получения справки.", 
+
+            var text = "*Список команд:*\n/today - Дни рождения сегодня\n/week - Дни рождения в ближайшую неделю\n/month - Дни рождения в ближайший месяц\n/getuser {Имя} - Получить информацию о пользователе\n/help - Справка";
+            await botClient.SendTextMessageAsync(chatId, text, 
                 parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
         }
     }
