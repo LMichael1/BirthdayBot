@@ -30,6 +30,15 @@ namespace BirthdayBot.Models.Commands
                                 i.Birthday.Date.AddYears(-i.Birthday.Year) <= DateTime.Today.AddYears(-DateTime.Today.Year).AddDays(7))
                                     .OrderBy(i => i.Birthday);
 
+            await botClient.SendTextMessageAsync(chatId, items.Count().ToString(),
+                        parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
+
+            if(items == null)
+            {
+                await botClient.SendTextMessageAsync(chatId, "Всё плохо",
+            parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
+            }
+
             if (items.Count() > 0)
             {
                 StringBuilder sb = new StringBuilder("*Дни рождения в ближайшую неделю:*\n");
