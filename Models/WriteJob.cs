@@ -37,7 +37,7 @@ namespace BirthdayBot.Models
                             parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
                 }
 
-                var itemsweek = result.Where(i => i.Birthday.Date.AddYears(-i.Birthday.Year) == DateTime.Today.AddDays(7).AddYears(-DateTime.Today.Year));
+                var itemsweek = result.Where(i => i.Birthday.Date.AddYears(-i.Birthday.Year + 1) == DateTime.Today.AddDays(7).AddYears(-DateTime.Today.Year + 1));
 
                 if (itemsweek.Count() > 0)
                 {

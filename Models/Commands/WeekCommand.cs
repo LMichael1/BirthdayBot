@@ -26,18 +26,9 @@ namespace BirthdayBot.Models.Commands
             AppDbContext context = new AppDbContext();
 
             var result = await context.GetUsers(String.Empty, chatId);
-            var items = result.Where(i => i.Birthday.Date.AddYears(-i.Birthday.Year) >= DateTime.Today.AddYears(-DateTime.Today.Year) &&
-                                i.Birthday.Date.AddYears(-i.Birthday.Year) <= DateTime.Today.AddYears(-DateTime.Today.Year).AddDays(7))
+            var items = result.Where(i => i.Birthday.Date.AddYears(-i.Birthday.Year + 1) >= DateTime.Today.AddYears(-DateTime.Today.Year + 1) &&
+                                i.Birthday.Date.AddYears(-i.Birthday.Year + 1) <= DateTime.Today.AddYears(-DateTime.Today.Year + 1).AddDays(7))
                                     .OrderBy(i => i.Birthday);
-
-            await botClient.SendTextMessageAsync(chatId, items.Count().ToString(),
-                        parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
-
-            if(items == null)
-            {
-                await botClient.SendTextMessageAsync(chatId, "Всё плохо",
-            parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
-            }
 
             if (items.Count() > 0)
             {
