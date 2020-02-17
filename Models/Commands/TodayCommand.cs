@@ -26,7 +26,7 @@ namespace BirthdayBot.Models.Commands
             AppDbContext context = new AppDbContext();
 
             var result = await context.GetUsers(String.Empty, chatId);
-            var items = result.Where(i => i.Birthday.Date == DateTime.Today);
+            var items = result.Where(i => i.Birthday.Day == DateTime.Today.Day && i.Birthday.Month == DateTime.Today.Month);
 
             if (items.Count() > 0)
             {

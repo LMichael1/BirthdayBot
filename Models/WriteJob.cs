@@ -23,7 +23,7 @@ namespace BirthdayBot.Models
             foreach (var group in groups)
             {
                 var result = await cont.GetUsers(String.Empty, group);
-                var items = result.Where(i => i.Birthday.Date == DateTime.Today);
+                var items = result.Where(i => i.Birthday.Day == DateTime.Today.Day && i.Birthday.Month == DateTime.Today.Month);
 
                 if (items.Count() > 0)
                 {
@@ -37,7 +37,7 @@ namespace BirthdayBot.Models
                             parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
                 }
 
-                var itemsweek = result.Where(i => i.Birthday.Date == DateTime.Today.AddDays(7));
+                var itemsweek = result.Where(i => i.Birthday.Date.AddYears(-i.Birthday.Year) == DateTime.Today.AddDays(7).AddYears(-DateTime.Today.Year));
 
                 if (itemsweek.Count() > 0)
                 {
